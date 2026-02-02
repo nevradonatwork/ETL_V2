@@ -1,0 +1,6 @@
+{
+  "database_name": "ETLTest",
+  "database_type": "sqlite",
+  "description": "Main database configuration",
+  "created_date": "2026-01-30"
+}

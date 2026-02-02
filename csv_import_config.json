@@ -1,0 +1,16 @@
+{
+  "csv_file_path": "Account.csv",
+  "table_name": "RawAccount",
+  "import_settings": {
+    "remove_duplicates": true,
+    "fill_missing_values": true,
+    "missing_value_replacement": "NULL",
+    "skip_empty_rows": true,
+    "if_table_exists": "append"
+  },
+  "column_settings": {
+    "clean_column_names": true,
+    "remove_extra_spaces": true,
+    "lowercase_column_names": false
+  }
+}
