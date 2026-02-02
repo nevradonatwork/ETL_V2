@@ -14,7 +14,7 @@ import json
 import os
 from datetime import datetime
 
-def (conn, table_name):
+def get_table_columns(conn, table_name):
     """
     Get column names from a database table
     Returns: list of column names (in lowercase for comparison)
@@ -24,7 +24,7 @@ def (conn, table_name):
     columns = [col[1] for col in cursor.fetchall()]
     return columns
 
-# def get_csv_columns(csv_file):
+def get_csv_columns(csv_file):
     """
     Get column names from CSV file
     Returns: pandas DataFrame and list of column names
