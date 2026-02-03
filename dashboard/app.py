@@ -29,8 +29,13 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+def get_project_root():
+    """Get the project root directory (normalized for Windows)."""
+    return os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
+
 # Database path
-DB_PATH = os.path.join(os.path.dirname(__file__), '..', 'database', 'banking.db')
+DB_PATH = os.path.normpath(os.path.join(get_project_root(), 'database', 'banking.db'))
 
 
 # ============================================================================

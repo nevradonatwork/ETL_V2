@@ -16,7 +16,11 @@ from datetime import datetime, timedelta
 
 
 # Configuration
-SAMPLE_FOLDER = os.path.join(os.path.dirname(__file__), '..', 'data', 'sample')
+def get_project_root():
+    """Get the project root directory (normalized for Windows)."""
+    return os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
+SAMPLE_FOLDER = os.path.normpath(os.path.join(get_project_root(), 'data', 'sample'))
 DATE_STR = datetime.now().strftime("%Y%m%d")
 
 # Random data pools

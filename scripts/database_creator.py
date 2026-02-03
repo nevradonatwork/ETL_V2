@@ -145,8 +145,8 @@ def get_database_info():
         return
 
     db_name = config.get('database_name', 'database/banking.db')
-    project_root = os.path.join(os.path.dirname(__file__), '..')
-    db_path = os.path.join(project_root, db_name)
+    project_root = get_project_root()
+    db_path = os.path.normpath(os.path.join(project_root, db_name))
 
     if not os.path.exists(db_path):
         print(f"Database does not exist: {db_path}")
