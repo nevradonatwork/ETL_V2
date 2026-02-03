@@ -13,9 +13,14 @@ import os
 from datetime import datetime
 
 
+def get_project_root():
+    """Get the project root directory (normalized for Windows)."""
+    return os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
+
 def load_config():
     """Load database configuration from JSON file."""
-    config_path = os.path.join(os.path.dirname(__file__), '..', 'config', 'database_config.json')
+    config_path = os.path.join(get_project_root(), 'config', 'database_config.json')
 
     try:
         with open(config_path, 'r') as f:
@@ -47,7 +52,7 @@ def create_database():
     db_dir = os.path.dirname(db_name)
     if db_dir:
         # Get absolute path relative to project root
-        project_root = os.path.join(os.path.dirname(__file__), '..')
+        project_root = get_project_root()
         db_path = os.path.join(project_root, db_name)
         db_dir_path = os.path.dirname(db_path)
 
@@ -55,7 +60,7 @@ def create_database():
             os.makedirs(db_dir_path)
             print(f"\nCreated directory: {db_dir_path}")
     else:
-        project_root = os.path.join(os.path.dirname(__file__), '..')
+        project_root = get_project_root()
         db_path = os.path.join(project_root, db_name)
 
     # Check if database already exists

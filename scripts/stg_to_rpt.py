@@ -20,9 +20,14 @@ from datetime import datetime
 # CONFIGURATION
 # ============================================================================
 
+def get_project_root():
+    """Get the project root directory (normalized for Windows)."""
+    return os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
+
 def load_configs():
     """Load configuration files."""
-    config_dir = os.path.join(os.path.dirname(__file__), '..', 'config')
+    config_dir = os.path.join(get_project_root(), 'config')
 
     with open(os.path.join(config_dir, 'database_config.json'), 'r') as f:
         return json.load(f)
@@ -30,9 +35,8 @@ def load_configs():
 
 def get_db_path(config):
     """Get the full database path."""
-    project_root = os.path.join(os.path.dirname(__file__), '..')
     db_name = config.get('database_name', 'database/banking.db')
-    return os.path.join(project_root, db_name)
+    return os.path.normpath(os.path.join(get_project_root(), db_name))
 
 
 def table_exists(conn, table_name):

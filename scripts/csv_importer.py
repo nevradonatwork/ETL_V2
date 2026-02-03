@@ -25,9 +25,14 @@ from glob import glob
 # CONFIGURATION
 # ============================================================================
 
+def get_project_root():
+    """Get the project root directory (normalized for Windows)."""
+    return os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
+
 def load_configs():
     """Load all configuration files."""
-    config_dir = os.path.join(os.path.dirname(__file__), '..', 'config')
+    config_dir = os.path.join(get_project_root(), 'config')
 
     configs = {}
 
@@ -44,9 +49,8 @@ def load_configs():
 
 def get_db_path(configs):
     """Get the full database path."""
-    project_root = os.path.join(os.path.dirname(__file__), '..')
     db_name = configs['database'].get('database_name', 'database/banking.db')
-    return os.path.join(project_root, db_name)
+    return os.path.normpath(os.path.join(get_project_root(), db_name))
 
 
 # ============================================================================
@@ -361,7 +365,7 @@ def process_csv_folder(folder_path, configs, conn):
 def move_processed_files(folder_path, configs):
     """Move processed CSV files to the processed folder."""
     processed_folder = configs['csv'].get('processed_folder', 'data/processed/')
-    project_root = os.path.join(os.path.dirname(__file__), '..')
+    project_root = get_project_root()
     processed_path = os.path.join(project_root, processed_folder)
 
     # Create date-based subfolder
@@ -408,7 +412,7 @@ def main(use_sample=False):
         return False
 
     # Get folder path
-    project_root = os.path.join(os.path.dirname(__file__), '..')
+    project_root = get_project_root()
     if use_sample:
         folder = configs['csv'].get('sample_folder', 'data/sample/')
     else:
